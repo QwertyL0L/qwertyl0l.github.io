@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Goofy Ahh Bot</title>
+	<link rel="icon" href="/Users/wextraaa/Goofy Ahh Bot (WEB)/favicon.ico" type="image/x-icon">
+		<style>
+			body {
+				
+				background-color: #3399cc; 
+				background-repeat: no-repeat; 
+				background-position: top left; 
+				background-attachment:fixed;
+					}
+		</style>
+		<style>
+			p {
+					text-align:center; 
+			 		font-family:Arial, sans-serif;
+			 		font-size:20px; 
+			 		font-style:normal; 
+			 		font-weight:normal; 
+			 		color:#ffffff; 
+			 		background-color:#3399cc;
+				}
+		</style>
+  </head>
+  <body>
+    <p id="text">Redirecting in <span id="counter">5</span></p>
+
+    <script>
+      var counter = 5;
+      var interval = setInterval(function() {
+        document.getElementById("counter").innerHTML = counter;
+        counter--;
+        if (counter < 0) {
+          clearInterval(interval);
+					window.location = "https://www.youtube.com/watch?v=z4JJ270xx98&t=0s";
+        }
+      }, 1000);
+    </script>
+  </body>
+</html>

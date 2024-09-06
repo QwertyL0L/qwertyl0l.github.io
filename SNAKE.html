@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Snake Game</title>
+	<style>
+		canvas {
+			border: 1px solid black;
+		}
+
+		body {
+			margin: 0;
+			overflow: hidden;
+		}
+
+		#high-score,
+		#current-score {
+			color: white;
+			font-size: 20px;
+			position: absolute;
+			left: 10px;
+			z-index: 1;
+		}
+
+		#high-score {
+			top: 10px;
+		}
+
+		#current-score {
+			top: 40px;
+		}
+	</style>
+</head>
+
+<body>
+	<p id="high-score">High Score: 0</p>
+	<p id="current-score">Score: 0</p>
+	<canvas id="canvas"></canvas>
+
+	<script>
+		var canvas = document.getElementById("canvas");
+		var ctx = canvas.getContext("2d");
+
+		// Set the canvas size to the window size
+		canvas.width = window.innerWidth;
+		canvas.height = window.innerHeight;
+
+		var snakeSize = 10;
+		var w = canvas.width;
+		var h = canvas.height;
+		var score = 0;
+		var direction = "right";
+
+		// Initialize the snake and food
+		var snake = [];
+		for (var i = 4; i >= 0; i--) {
+			snake.push({ x: i, y: 0 });
+		}
+
+		var food = {
+			x: Math.floor(Math.random() * w / snakeSize),
+			y: Math.floor(Math.random() * h / snakeSize)
+		};
+
+		// Load the high score from local storage
+		var highScore = localStorage.getItem("snakeHighScore") || 0;
+		document.getElementById("high-score").innerText = "High Score: " + highScore;
+
+		function drawSnake(x, y) {
+			ctx.fillStyle = "#00FF00";
+			ctx.fillRect(x * snakeSize, y * snakeSize, snakeSize, snakeSize);
+			ctx.fillStyle = "#000000";
+			ctx.strokeRect(x * snakeSize, y * snakeSize, snakeSize, snakeSize);
+		}
+
+		function resetGame() {
+			if (score > highScore) {
+				highScore = score;
+				localStorage.setItem("snakeHighScore", highScore);
+				document.getElementById("high-score").innerText = "High Score: " + highScore;
+			}
+			score = 0;
+			document.getElementById("current-score").innerText = "Score: " + score;  // Update the displayed score
+			direction = "right";
+			snake = [];
+			for (var i = 4; i >= 0; i--) {
+				snake.push({ x: i, y: 0 });
+			}
+			food = {
+				x: Math.floor(Math.random() * w / snakeSize),
+				y: Math.floor(Math.random() * h / snakeSize)
+			};
+		}
+
+
+		function paint() {
+			ctx.fillStyle = "#000000";
+			ctx.fillRect(0, 0, w, h);
+
+			var nx = snake[0].x;
+			var ny = snake[0].y;
+
+			if (direction == "right") {
+				nx++;
+			} else if (direction == "left") {
+				nx--;
+			} else if (direction == "up") {
+				ny--;
+			} else if (direction == "down") {
+				ny++;
+			}
+
+			// Check if the snake hits the wall
+			if (nx < 0 || nx >= w / snakeSize || ny < 0 || ny >= h / snakeSize) {
+				resetGame();
+				return;
+			}
+
+			// Check if the snake hits itself
+			for (var i = 1; i < snake.length; i++) {
+				if (nx == snake[i].x && ny == snake[i].y) {
+					resetGame();
+					return;
+				}
+			}
+
+			// Check if the snake eats the food
+			if (nx == food.x && ny == food.y) {
+				score++;
+				document.getElementById("current-score").innerText = "Score: " + score;
+				food = {
+					x: Math.floor(Math.random() * w / snakeSize),
+					y: Math.floor(Math.random() * h / snakeSize)
+				};
+			} else {
+				snake.pop();
+			}
+
+			var tail = { x: nx, y: ny };
+			snake.unshift(tail);
+
+			for (var i = 0; i < snake.length; i++) {
+				var c = snake[i];
+				drawSnake(c.x, c.y);
+			}
+
+			// Draw the food
+			ctx.fillStyle = "#FF0000";
+			ctx.fillRect(food.x * snakeSize, food.y * snakeSize, snakeSize, snakeSize);
+		}
+
+		setInterval(paint, 60);
+
+		document.addEventListener("keydown", function (e) {
+			if (e.key === "a" && direction !== "right") {
+				direction = "left";
+			} else if (e.key === "w" && direction !== "down") {
+				direction = "up";
+			} else if (e.key === "d" && direction !== "left") {
+				direction = "right";
+			} else if (e.key === "s" && direction !== "up") {
+				direction = "down";
+			}
+		});
+	</script>
+</body>
+
+</html>
