@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About</title>
     <style>
-    	body {background-color: #3399cc; background-repeat: no-repeat; background-position: top left; background-attachment:fixed;}
-    	h1{text-align:center; font-family:Arial, sans-serif; color:#ffffff; background-color:#3399cc;}
-		p {text-align:center; font-family:Arial, sans-serif; font-size:42px; font-style:normal; font-weight:normal; color:#ffffff; background-color:#3399cc;}
+    	body {background-color: #3399cc; background-repeat: no-repeat; background-position: top left; background-attachment: fixed;}
+    	h1 {text-align: center; font-family: Arial, sans-serif; color: #ffffff; background-color: #3399cc;}
+		p {text-align: center; font-family: Arial, sans-serif; font-size: 42px; font-style: normal; font-weight: normal; color: #ffffff; background-color: #3399cc;}
     </style>
 </head>
 <body>
@@ -27,16 +27,35 @@
         background-color: #4287f5;
       }
   </style>
-    </style>
+
     <h1>About</h1>
-	<link rel="icon" href="/Users/wextraaa/Goofy Ahh Bot (WEB)/favicon.ico" type="image/x-icon">
     <p>Goofy ahh bot was created by @wextraaa solely because he was bored one day 💀.</p>
     <!-- <p>Little did he know it would become (somewhat) popular.</p> -->
+    
     <p>⠀⠀⠀</p>
     <p>⠀⠀⠀</p>
-    <p>Random Useless Fact: {{fact}}</p>
+    <p>Random Useless Fact: <span id="useless-fact">Loading...</span></p>
+    
     <div style="display: flex; justify-content: center;">
-        <a href="{{ url_for('home') }}">Back to Home</a>
+        <a href="index.html">Back to Home</a>
     </div>
+
+    <script>
+      // Fetch random useless fact from the API
+      async function fetchRandomFact() {
+          const url = "https://uselessfacts.jsph.pl/random.json?language=en";
+          try {
+              const response = await fetch(url);
+              const factData = await response.json();
+              document.getElementById('useless-fact').innerText = factData.text;
+          } catch (error) {
+              document.getElementById('useless-fact').innerText = "Failed to retrieve a useless fact.";
+              console.error('Error fetching fact:', error);
+          }
+      }
+
+      // Call the function to fetch the fact when the page loads
+      fetchRandomFact();
+    </script>
 </body>
 </html>
