@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOS</title>
+    <style>
+        body {
+            background-color: #3399cc;
+            background-repeat: no-repeat;
+            background-position: top left;
+            background-attachment: fixed;
+        }
+
+        h1 {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            color: #ffffff;
+            background-color: #3399cc;
+            white-space: pre-line;
+        }
+
+        p {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            font-size: 42px;
+            font-style: normal;
+            font-weight: normal;
+            color: #ffffff;
+            background-color: #3399cc;
+            white-space: pre-line;
+        }
+
+        p2 {
+            display: block;
+            margin: 0 auto;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            font-size: 20px;
+            font-style: normal;
+            font-weight: normal;
+            color: #ffffff;
+            background-color: #3399cc;
+            max-width: 80%;
+            white-space: pre-line;
+            /* Allow line breaks */
+        }
+    </style>
+</head>
+
+<body>
+    <style>
+        a {
+            display: inline-block;
+            margin: 10px;
+            padding: 10px 20px;
+            text-decoration: none;
+            background-color: lightskyblue;
+            color: white;
+            border-radius: 25px;
+            text-align: center;
+            transition: background-color 0.5s;
+        }
+
+        a:hover {
+            background-color: #4287f5;
+        }
+    </style>
+
+    <h1>TOS for Goofy ahh Bot</h1>
+    <p>Welcome to the Terms of Service for Goofy ahh Bot!</p>
+    <p>By using this bot, you agree to the following terms and conditions:</p>
+
+    <p2>1. Goofy ahh bot only stores the data that is necessary for certain bot commands to work (ex. /snipe, /esnipe,
+        /confess, etc.). But you can always remove that data using them using /clearsnipe</p2>
+    <p2>2. Goofy ahh bot does not store any data that is NOT necessary for its bot commands to work (ex. /rate commands, economy commands, music commands, etc.).</p2>
+    
+    <p>
+    </p>
+    
+    <p>Random Useless Fact: <span id="useless-fact">Loading...</span></p>
+
+    <div style="display: flex; justify-content: center;">
+        <a href="index.html">Back to Home</a>
+    </div>
+
+    <script>
+        // Fetch random useless fact from the API
+        async function fetchRandomFact() {
+            const url = "https://uselessfacts.jsph.pl/random.json?language=en";
+            try {
+                const response = await fetch(url);
+                const factData = await response.json();
+                document.getElementById('useless-fact').innerText = factData.text;
+            } catch (error) {
+                document.getElementById('useless-fact').innerText = "Failed to retrieve a useless fact.";
+                console.error('Error fetching fact:', error);
+            }
+        }
+
+        // Call the function to fetch the fact when the page loads
+        fetchRandomFact();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy</title>
+    <style>
+        body {
+            background-color: #3399cc;
+            background-repeat: no-repeat;
+            background-position: top left;
+            background-attachment: fixed;
+        }
+
+        h1 {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            color: #ffffff;
+            background-color: #3399cc;
+            white-space: pre-line;
+        }
+
+        p {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            font-size: 42px;
+            font-style: normal;
+            font-weight: normal;
+            color: #ffffff;
+            background-color: #3399cc;
+            white-space: pre-line;
+        }
+
+        p2 {
+            display: block;
+            margin: 0 auto;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            font-size: 20px;
+            font-style: normal;
+            font-weight: normal;
+            color: #ffffff;
+            background-color: #3399cc;
+            max-width: 80%;
+            white-space: pre-line;
+            /* Allow line breaks */
+        }
+    </style>
+</head>
+
+<body>
+    <style>
+        a {
+            display: inline-block;
+            margin: 10px;
+            padding: 10px 20px;
+            text-decoration: none;
+            background-color: lightskyblue;
+            color: white;
+            border-radius: 25px;
+            text-align: center;
+            transition: background-color 0.5s;
+        }
+
+        a:hover {
+            background-color: #4287f5;
+        }
+    </style>
+
+    <h1>Privacy Policy for Goofy ahh Bot</h1>
+    <p>By using Goofy ahh Bot, you agree to the following terms and conditions:</p>
+    <p2>
+        <h1>1. Introduction</h1>
+        This privacy policy outlines how we handle and store data collected through the /snipe, /esnipe, /confess, /enable_snipe, /disable_snipe, /bugreport and /suggest
+        commands in our Discord bot. By using these commands (or the bot itself), you agree to the collection and storage of certain data as
+        described below.
+
+        <h1>2. Data Collection</h1>
+
+        /snipe: This command stores the content of the most recently deleted messages within a channel. The data is
+        stored indefinitely unless manually cleared using the /clearsnipe command.
+
+        /esnipe: This command stores the original and edited versions of messages that have been edited within a
+        channel. The data is stored indefinitely unless manually cleared using the /clearsnipe command.
+
+        /confess: This command stores anonymous confessions made by users. The confessions are stored indefinitely (for
+        safety reasons) and cannot be deleted by users.
+
+        /enable_snipe, /disable_snipe: These commands enable or disable the sniping notifications for the specified server (will be removed in the future).
+
+        /bugreport: This command stores bug reports submitted by users. The bug reports are stored indefinitely (for safety reasons) and cannot be deleted by users.
+
+        /suggest: This command stores suggestions submitted by users. The suggestions are stored indefinitely (for safety reasons) and cannot be deleted by users.
+
+        <h1>3. Data Storage and Retention</h1>
+        All data collected through the aforementioned commands is stored indefinitely on our servers. The data will only
+        be removed when the /clearsnipe command is executed, which permanently deletes the stored information for the
+        specified command(s).
+
+        <h1>4. Data Usage</h1>
+        The stored data is used solely for the purpose of providing the functionality of the /snipe, /esnipe, and
+        /confess commands. We do not use this data for any other purpose, nor do we share it with third parties.
+
+        <h1>5. User Control</h1>
+        Users have the ability to clear the stored data at any time by using the /clearsnipe command. This command will
+        permanently delete the stored data for the specified command(s) and cannot be undone.
+
+        <h1>6. Security</h1>
+        We take the security of your data seriously. All data stored is protected with appropriate measures to prevent
+        unauthorized access or disclosure. However, no method of transmission over the internet or electronic storage is
+        100% secure, and we cannot guarantee absolute security.
+
+        <h1>7. Changes to This Policy</h1>
+        We may update this privacy policy from time to time to reflect changes in our practices or for other
+        operational, legal, or regulatory reasons. Any changes will be communicated to users through appropriate
+        channels.
+
+        <h1>8. Contact Us</h1>
+        If you have any questions or concerns about this privacy policy, please contact us through our discord server which is located on the home page.
+
+        By using the /snipe, /esnipe, /confess or any other commands, you acknowledge that you have read and understood
+        this privacy policy.
+    </p2>
+    <p2></p2>
+    <!-- <p>Little did he know it would become (somewhat) popular.</p> -->
+    <p>⠀⠀⠀</p>
+    <p>⠀⠀⠀</p>
+    <p>Random Useless Fact: <span id="useless-fact">Loading...</span></p>
+
+    <div style="display: flex; justify-content: center;">
+        <a href="index.html">Back to Home</a>
+    </div>
+
+    <script>
+        // Fetch random useless fact from the API
+        async function fetchRandomFact() {
+            const url = "https://uselessfacts.jsph.pl/random.json?language=en";
+            try {
+                const response = await fetch(url);
+                const factData = await response.json();
+                document.getElementById('useless-fact').innerText = factData.text;
+            } catch (error) {
+                document.getElementById('useless-fact').innerText = "Failed to retrieve a useless fact.";
+                console.error('Error fetching fact:', error);
+            }
+        }
+
+        // Call the function to fetch the fact when the page loads
+        fetchRandomFact();
+    </script>
+</body>
+
+</html>
